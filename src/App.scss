@@ -1,0 +1,180 @@
+@import "reset";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  color: #000;
+  font-size: 14px;
+}
+
+/*
+================================
+      Common
+================================
+*/
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1140px;
+}
+
+h1 {
+  font-family: Roboto, 'sans-serif';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 1.16;
+  color: #000;
+}
+h2 {
+  font-size: 20px;
+}
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.text-transparent {
+  color: transparent !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+/* Flexbox */
+.d-flex {
+  display: flex;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.flex-justify-start {
+  justify-content: flex-start;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-between {
+  justify-content: space-between;
+}
+
+.flex-justify-around {
+  justify-content: space-around;
+}
+
+.flex-items-start {
+  align-items: flex-start;
+}
+
+.flex-items-end {
+  align-items: flex-end;
+}
+
+.flex-items-center {
+  align-items: center;
+}
+
+.flex-items-baseline {
+  align-items: baseline;
+}
+
+.flex-items-stretch {
+  align-items: stretch;
+}
+
+.flex-content-start {
+  align-content: flex-start;
+}
+
+.flex-content-end {
+  align-content: flex-end;
+}
+
+.flex-content-center {
+  align-content: center;
+}
+
+.flex-content-between {
+  align-content: space-between;
+}
+
+.flex-content-around {
+  align-content: space-around;
+}
+
+.flex-content-stretch {
+  align-content: stretch;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+/* Margin & Padding */
+@each $abbr, $name in ('l': 'left', 'r': 'right', 't': 'top', 'b': 'bottom') {
+  @each $prop, $prop-name in ('m': 'margin', 'p': 'padding') {
+    @for $i from 1 through 10 {
+      .#{$prop}#{$abbr}-#{$i} {
+        #{$prop-name}-#{$name}: .25rem * $i;
+      }
+    }
+  }
+}
+
+/*Responsive*/
+@media screen and (max-width: 766.98px) {
+  h1 {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 15px;
+  }
+  /* Margin & Padding */
+  @each $abbr, $name in ('l': 'left', 'r': 'right', 't': 'top', 'b': 'bottom') {
+    @each $prop, $prop-name in ('m': 'margin', 'p': 'padding') {
+      @for $i from 1 through 10 {
+        .#{$prop}#{$abbr}-#{$i} {
+          #{$prop-name}-#{$name}: (.25rem/2) * $i;
+        }
+      }
+    }
+  }
+}

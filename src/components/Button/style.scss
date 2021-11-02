@@ -1,0 +1,32 @@
+$default: #eeeeee;
+$white: #fff;
+$primary: #ff8d00;
+.btn {
+    background: $default;
+    border-radius: 5px;
+    padding: 12px 22px;
+    transition: all 0.2s;
+    font-family: Roboto, 'sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.16;
+    cursor: pointer;
+    &:not(.primary) {
+        color: #000;
+        &:hover {
+            background-color: darken($default, 10);
+        }
+    }
+    &.primary {
+        background-color: $primary;
+        color: $white;
+        &:hover {
+            background-color: darken($primary, 10);
+        }
+    }
+    @media screen and (max-width: 766.98px) {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
