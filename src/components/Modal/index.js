@@ -66,8 +66,6 @@ export default function Modal({width = "450px", closeModal, startTimer}) {
                             if (validateRange()) {
                                 startTimer(range);
                                 closeModal();
-                            } else {
-
                             }
                         }}
                     />

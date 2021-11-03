@@ -3,30 +3,37 @@ import Sortable from 'sortablejs';
 
 import "./style.scss";
 
-export default function Table({people = []}) {
+export default function Table({people = [], onSorted}) {
     const [peoplesList, setPeoplesList] = useState(people);
+    const [isToggleChecked, setIsToggleChecked] = useState(false);
     const tbodyElRef = useRef(null);
     let sortable;
 
+    function destroySortable() {
+        sortable && sortable.el && sortable.destroy();
+    }
+
     useEffect(() => {
         sortable && sortable.destroy();
-        sortable = Sortable.create(tbodyElRef.current, {
-            onEnd: function (event) {
-                const {oldIndex, newIndex} = event;
-                if (oldIndex !== newIndex) {
-                    updatePeopleDataOnDragEnd(oldIndex, newIndex);
-                }
+        if (tbodyElRef && tbodyElRef.current) {
+            sortable = Sortable.create(tbodyElRef.current, {
+                animation: 150,
+                onEnd: function (event) {
+                    setIsToggleChecked(false);
+                    const {oldIndex, newIndex} = event;
+                    if (oldIndex !== newIndex) {
+                        updatePeopleDataOnDragEnd(oldIndex, newIndex);
+                    }
 
-            },
-        });
-        if (checkIsPeopleSortedByPotatos()) {
-            sortable && sortable.destroy();
-            console.log('yes sorted');
-        } else {
-            console.log('not sorted yet!');
+                },
+            });
+        }
+        if (!isToggleChecked && checkIsPeopleSortedByPotatos()) {
+            destroySortable();
+            onSorted && onSorted();
         }
         return () => {
-            sortable.destroy();
+            destroySortable();
         };
     }, [peoplesList]);
     useEffect(() => {
@@ -56,6 +63,7 @@ export default function Table({people = []}) {
     }
 
     function handleSelection(id, checked) {
+        setIsToggleChecked(true);
         let people = peoplesList.map(item => {
             if (item.id == id) {
                 item.isChecked = checked;
@@ -85,9 +93,7 @@ export default function Table({people = []}) {
                         <tbody ref={tbodyElRef}>
                         {peoplesList.map(({id, isChecked, email, potatos, tags, fullName, location}, index) => {
                             return (
-                                <tr /*draggable onDragStart={onDrageStart} onDrag={onDrag} onDragEnd={onDragEnd}
-                                    onDragEnter={onDragEnter} onDragOver={onDragOver}*/ key={id} id={`row-${id}`}
-                                                                                        className={isChecked ? ' checked ' : ''}>
+                                <tr key={id} id={`row-${id}`} className={isChecked ? ' checked ' : ''}>
                                     <td>
                                         <div className="d-flex flex-items-center">
                                             <input type="checkbox" id={`isChecked-${id}`} className="checkbox"

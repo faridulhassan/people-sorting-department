@@ -60,7 +60,7 @@ $orange: #FF8D00;
 
     tr {
       background-color: $white;
-      transition: all 0.15s;
+      //transition: all 0.15s;
 
       &[data-rbd-placeholder-context-id] {
         border-color: #eee !important;
