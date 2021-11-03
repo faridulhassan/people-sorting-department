@@ -27,7 +27,7 @@ const Timer = ({className = '', pause = false, getTime}) => {
                 setMinute(computedMinute);
 
                 setCounter((counter) => counter + 1);
-                getTime({second, minute});
+                getTime({second:computedSecond, minute:computedMinute});
             }, 1000);
         }
 
