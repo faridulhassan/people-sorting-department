@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "reset";
 
 * {
@@ -33,9 +34,11 @@ h1 {
   line-height: 1.16;
   color: #000;
 }
+
 h2 {
   font-size: 20px;
 }
+
 button {
   outline: none;
   border: none;
@@ -172,7 +175,7 @@ button {
     @each $prop, $prop-name in ('m': 'margin', 'p': 'padding') {
       @for $i from 1 through 10 {
         .#{$prop}#{$abbr}-#{$i} {
-          #{$prop-name}-#{$name}: (.25rem/2) * $i;
+          #{$prop-name}-#{$name}: (math.div(.25rem, 2)) * $i;
         }
       }
     }
